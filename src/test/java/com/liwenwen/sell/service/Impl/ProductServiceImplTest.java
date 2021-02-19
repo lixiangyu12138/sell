@@ -32,8 +32,6 @@ class ProductServiceImplTest {
 
     @Test
     void findAll() {
-        //Sort sort = new Sort("id");
-        //Sort sort = new Sort(Sort.Direction.DESC, "id");
         PageRequest pageRequest = PageRequest.of(0, 2);
         Page<ProductInfo> productInfos = productService.findAll(pageRequest);
         System.out.println(productInfos.getTotalElements());

@@ -16,3 +16,6 @@ spring:
     url: jdbc:mysql://localhost:3306/object?serverTimezone=Asia/Shanghai
   jpa:
     show-sql: true
+server:
+  servlet:
+    context-path: /sell
