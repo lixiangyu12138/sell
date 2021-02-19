@@ -13,6 +13,7 @@ public interface ProductService {
     Page<ProductInfo> findAll(Pageable pageable);
     List<ProductInfo> findUpAll();
     ProductInfo save(ProductInfo productInfo);
+    //ProductInfo  findByProductStatus(List<ProductInfo> productInfos);
     //加库存
 
     //减库存

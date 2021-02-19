@@ -35,4 +35,6 @@ public class ProductServiceImpl implements ProductService {
     public ProductInfo save(ProductInfo productInfo) {
         return productInfoDao.save(productInfo);
     }
+
+
 }
