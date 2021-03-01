@@ -8,7 +8,11 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
+
+/**
+ * 订单表
+ */
 
 @Entity
 @Data

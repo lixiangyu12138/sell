@@ -5,7 +5,10 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.sql.Date;
+
+/**
+ * 订单详情表
+ */
 
 @Entity
 @Data

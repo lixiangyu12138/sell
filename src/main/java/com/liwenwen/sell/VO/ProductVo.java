@@ -10,7 +10,7 @@ import java.util.List;
  */
 @Data
 public class ProductVo {
-    @JsonProperty("name")
+    @JsonProperty("name")  //以name属性返回给前端
     private String categoryName;
     @JsonProperty("type")
     private Integer categoryType;

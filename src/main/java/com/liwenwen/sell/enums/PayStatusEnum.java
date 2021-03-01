@@ -2,6 +2,10 @@ package com.liwenwen.sell.enums;
 
 import lombok.Getter;
 
+/**
+ * 支付状态
+ */
+
 @Getter
 public enum PayStatusEnum {
     WAIT(0,"待付款"),

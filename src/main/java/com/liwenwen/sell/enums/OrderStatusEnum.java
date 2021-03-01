@@ -2,6 +2,9 @@ package com.liwenwen.sell.enums;
 
 import lombok.Getter;
 
+/**
+ * 订单状态
+ */
 @Getter
 public enum OrderStatusEnum {
     NEW(0,"新订单"),

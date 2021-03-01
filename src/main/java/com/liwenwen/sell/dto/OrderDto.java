@@ -1,16 +1,24 @@
 package com.liwenwen.sell.dto;
 
-import com.liwenwen.sell.enums.OrderStatusEnum;
-import com.liwenwen.sell.enums.PayStatusEnum;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.liwenwen.sell.pojo.OrderDetail;
+import com.liwenwen.sell.utils.serializer.DateFormat;
 import lombok.Data;
 
-import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
+/**
+ * dto:数据传输对象，专门用来在各个层之间传输
+ * 订单信息
+ *
+ */
+
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDto {
 
     //订单id
@@ -26,9 +34,15 @@ public class OrderDto {
     //订单总金额
     private BigDecimal buyerAmount;
     //订单状态  已下单
-    private Integer orderStatus= OrderStatusEnum.NEW.getCode();
+    private Integer orderStatus;
     //支付状态  未支付
-    private Integer payStatus= PayStatusEnum.WAIT.getCode();
-    //
+    private Integer payStatus;
+    //创建时间
+    @JsonSerialize(using = DateFormat.class)
+    private Date cresteTime;
+    //更新时间
+    @JsonSerialize(using = DateFormat.class)
+    private Date updateTime;
+    //订单详情
     private List<OrderDetail> orderDetails;
 }
