@@ -28,7 +28,7 @@ class OrderMasterDaoTest {
         master.setBuyerPhone("17114120208");
         master.setBuyerAddress("慕课网");
         master.setBuyerOpenid("10010");
-        master.setBuyerAmount(new BigDecimal(2.5));
+        master.setOrderAmount(new BigDecimal(2.5));
         OrderMaster save = orderMasterDao.save(master);
         Assert.assertNotNull(save);
     }

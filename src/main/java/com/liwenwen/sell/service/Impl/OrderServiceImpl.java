@@ -73,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = new OrderMaster();
         orderDto.setOrderId(orderId);
         BeanUtils.copyProperties(orderDto,orderMaster);
-        orderMaster.setBuyerAmount(orderSum);
+        orderMaster.setOrderAmount(orderSum);
         orderMaster.setOrderStatus(OrderStatusEnum.NEW.getCode());
         orderMaster.setPayStatus(PayStatusEnum.WAIT.getCode());
         orderMasterDao.save(orderMaster);
@@ -202,6 +202,13 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orderDto;
+    }
+
+    @Override
+    public Page<OrderDto> findAll(Pageable pageable) {
+        Page<OrderMaster> all = orderMasterDao.findAll(pageable);
+        List<OrderDto> orderDtoList = OrderMasterToOrderDTOConverter.convwet(all.getContent());
+        return new PageImpl<OrderDto>(orderDtoList,pageable,all.getTotalElements());
     }
 
 

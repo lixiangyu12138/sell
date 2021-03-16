@@ -1,4 +1,4 @@
-package com.liwenwen.sell.service;
+package com.liwenwen.sell.service.Impl;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;

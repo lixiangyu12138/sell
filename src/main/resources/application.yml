@@ -21,8 +21,25 @@ spring:
         enable_lazy_load_no_trans: true
   jackson:
     default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: true
+
+  mvc:
+    static-path-pattern: /**
 server:
   servlet:
     context-path: /sell
+wechat:
+  mpAppid: wxa765302b7924279e
+  mpAppSecret: 18ea55b358597865f5accdcb493bc928
+  mchId: 1409146202
+  mchKey: 18ea55b358597865f5accdcb493bc928
+  keyPath: static/api/seller.json
+  notifyUrl: http://li.666600000.xyz/sell/pay/notify
+
+
+
+
+
 
 

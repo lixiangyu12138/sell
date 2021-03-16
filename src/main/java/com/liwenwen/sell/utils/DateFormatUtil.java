@@ -17,7 +17,7 @@ import java.util.Date;
 @JsonComponent
 public class DateFormatUtil {
 
-    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    //private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 日期格式化
@@ -25,27 +25,9 @@ public class DateFormatUtil {
     public static class DateJsonSerializer extends JsonSerializer<Date> {
         @Override
         public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-            jsonGenerator.writeString(dateFormat.format(date));
+            jsonGenerator.writeNumber(date.getTime()/1000);
         }
     }
 
-    /**
-     * 解析日期字符串
-     */
-    public static class DateJsonDeserializer extends JsonDeserializer<Date> {
-        @Override
-        public Date deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-            try {
-                String text = null;
-                try {
-                    text = jsonParser.getText();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                return dateFormat.parse(text);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
+
 }
