@@ -2,6 +2,8 @@ package com.liwenwen.sell.dto;
 
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.liwenwen.sell.enums.OrderStatusEnum;
+import com.liwenwen.sell.enums.PayStatusEnum;
 import com.liwenwen.sell.pojo.OrderDetail;
 import com.liwenwen.sell.utils.serializer.DateFormat;
 import lombok.Data;
@@ -44,4 +46,22 @@ public class OrderDto {
     private Date updateTime;
     //订单详情
     private List<OrderDetail> orderDetails;
+    public static String getOrderStatusEnum(Integer n){
+        switch (n){
+            case 0: return OrderStatusEnum.NEW.getMessage();
+            case 1:return OrderStatusEnum.FINISHED.getMessage();
+            case 2: return OrderStatusEnum.CANCEL.getMessage();
+            default:
+                return null;
+        }
+
+    }
+    public static String getPayStatusEnum(Integer n){
+        switch (n){
+            case 0: return PayStatusEnum.WAIT.getMessage();
+            case 1:return PayStatusEnum.SUCCESS.getMessage();
+            default:
+                return null;
+        }
+    }
 }

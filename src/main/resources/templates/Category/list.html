@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="common/header :: header"  ></div>
+    <style>
+        .disabled{
+            color:gray;
+            cursor:pointer;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div id = "wrapper" class="toggled">
+    <!-- 边栏  -->
+    <div th:replace="common/nav :: sidebar-wrapper"  ></div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>类目ID</th>
+                            <th>类目名称</th>
+                            <th>类目编号</th>
+                            <th>创建时间</th>
+                            <th>修改时间</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  th:each="category: ${all}">
+                            <td th:text="${category.categoryId}"> </td>
+                            <td th:text="${category.categoryName}"> </td>
+                            <td th:text="${category.categoryType}"> </td>
+                            <th th:text="${category.createTime}"> </th>
+                            <th th:text="${category.updateTime}"> </th>
+                            <td><a th:href="@{'/seller//category/update?categoryId=' + ${category.categoryId}}">修改</a></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--    -->
+</div>
+
+</body>
+</html>

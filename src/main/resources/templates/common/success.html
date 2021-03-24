@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>取消订单</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="alert alert-dismissable alert-success" style="margin-top: 50px">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4>
+                    注意!
+                </h4> <strong th:text="${msg}">取消成功!</strong> <a th:href="${url}" class="alert-link">5秒后跳转</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body><script>
+    setTimeout('location.href="[[${url}]]"',5000)
+</script>
+
+</html>

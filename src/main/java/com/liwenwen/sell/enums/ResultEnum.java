@@ -17,6 +17,7 @@ public enum ResultEnum {
     ORDER_FIND_ERROR(19,"订单openid与传入参数不同"),
     WECHAT_MP_ERROR(20,"微信公众号相关错误"),
     WECHAT_PAY_ERROR(21,"微信支付异步通知金额校验不通过"),
+    WECHAT_OPEN_LOGIN_ERROR(22,"用户不存在"),
     ;
     private Integer code;
     private String msg;

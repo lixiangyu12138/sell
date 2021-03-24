@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 public class WechatMpConfig {
     @Autowired
     private WechatAccountConfig wechatAccountConfig;
-//    @Autowired
-//    WxMpConfigStorage configStorage;
 
     @Bean
     public WxMpService wxMpService(){
@@ -25,7 +23,7 @@ public class WechatMpConfig {
 //    @Bean
     public WxMpConfigStorage configStorage(){
         WxMpDefaultConfigImpl configStorage=new WxMpDefaultConfigImpl();
-        configStorage.setAppId(wechatAccountConfig.getMpAppid());
+        configStorage.setAppId(wechatAccountConfig.getMpAppId());
         configStorage.setSecret(wechatAccountConfig.getMpAppSecret());
         return configStorage;
     }

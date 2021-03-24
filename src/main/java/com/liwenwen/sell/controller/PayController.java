@@ -23,6 +23,14 @@ public class PayController {
     private OrderService orderService;
     @Autowired
     private PayService payService;
+
+    /**
+     * 用的Thymeleaf
+     * @param orderId
+     * @param returnUrl
+     * @param map
+     * @return
+     */
     @GetMapping("/create")
     public String pay(@RequestParam("orderId") String orderId,
                             @RequestParam("returnUrl") String returnUrl,

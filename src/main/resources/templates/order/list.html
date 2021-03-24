@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="common/header :: header"  ></div>
+    <style>
+        .disabled{
+            color:gray;
+            cursor:pointer;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div id = "wrapper" class="toggled">
+<!-- 边栏  -->
+    <div th:replace="common/nav :: sidebar-wrapper"  ></div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>订单ID</th>
+                            <th>姓名</th>
+                            <th>手机号</th>
+                            <th>地址</th>
+                            <th>金额</th>
+                            <th>订单状态</th>
+                            <th>支付状态</th>
+                            <th>创建时间</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  th:each="order: ${all.getContent()}">
+                            <td th:text="${order.orderId}"> </td>
+                            <td th:text="${order.buyerName}"> </td>
+                            <td th:text="${order.buyerPhone}"> </td>
+                            <th th:text="${order.buyerAddress}"> </th>
+                            <th th:text="${order.orderAmount}"> </th>
+                            <th th:text="${order.getOrderStatusEnum(order.orderStatus)}"> </th>
+                            <th th:text="${order.getPayStatusEnum(order.payStatus)}"> </th>
+                            <th th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm:ss')}"> </th>
+                            <td><a th:href="@{'/seller/order/detail?orderId=' + ${order.orderId}}" >详情</a></td>
+                            <td><a th:href="@{'/seller/order/delete?orderId=' + ${order.orderId}}" th:if="${order.orderStatus} eq '0'">取消</a></td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!--        分页-->
+                <div class="span12">
+
+                    <ul class="pagination pull-right " >
+                        <li  class=""th:classappend="${page==1} ? 'disabled' : ''" >
+                            <a  th:href="@{'/seller/order/list?page=' + ${page-1}+ '&size=10'}">上一页</a>
+                        </li>
+
+                        <li  th:each="order,orderStat : ${all}" class=""th:classappend="${orderStat.count==page} ? 'disabled' : '' ">
+
+                            <a th:href="@{'/seller/order/list?page=' + ${orderStat.count}+ '&size=10'}" th:if=" ${orderStat.index} lt ${all.getTotalPages()}"  th:text="${orderStat.count}" >4</a>
+                        </li>
+                        <li class="disabled" th:if=" ${page} eq ${all.getTotalPages()}" >
+                            <a href="#" th:text="${all.getTotalPages()}">4</a>
+                        </li>
+
+                        <li class=""th:classappend="${page==all.getTotalPages()} ? 'disabled' : ''">
+                            <a th:href="@{'/seller/order/list?page=' + ${page+1} + '&size=10'}">下一页</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    -->
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="common/header :: header"  ></div>
+</head>
+<body>
+<div id = "wrapper" class="toggled">
+    <!-- 边栏  -->
+    <div th:replace="common/nav :: sidebar-wrapper"  ></div>
+    <div id="page-content-wrapper">
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="table table-bordered" style="width: 500px;">
+                <thead>
+                <tr>
+                    <th>订单id</th>
+                    <th>订单总金额</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${one.orderId}">1</td>
+                    <td th:text="${one.orderAmount}">TB - Monthly</td>
+                </tbody>
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>商品id</th>
+                    <th>商品名称</th>
+                    <th>价格</th>
+                    <th>数量</th>
+                    <th>总额</th>
+                </thead>
+
+                <tbody>
+                <tr  th:each="order: ${one.getOrderDetails()}">
+                    <td th:text="${order.productId}"> </td>
+                    <td th:text="${order.productName}"> </td>
+                    <td th:text="${order. productPrice}"> </td>
+                    <th th:text="${order.productQuantity}"> </th>
+                    <th th:text="${order. productPrice * order.productQuantity}"> </th>
+
+                </tr>
+
+                </tbody>
+            </table>
+            <a type="button" class="btn btn-info btn-default" th:href="@{'/seller/order/finished?orderId=' + ${one.orderId}}" th:if="${one.orderStatus} eq '0'">完结订单</a>
+            <a type="button" class="btn btn-default btn-danger" th:href="@{'/seller/order/delete?orderId=' + ${one.orderId}}" th:if="${one.orderStatus} eq '0'">取消订单</a>
+        </div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+</body>
+</html>

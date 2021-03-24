@@ -10,12 +10,21 @@ import javax.net.ssl.SSLContext;
 @Component
 @ConfigurationProperties(prefix = "wechat")
 public class WechatAccountConfig {
-    private String mpAppid;
+    //微信公众平台Id
+    private String mpAppId;
+    //微信公众平台密钥
     private String mpAppSecret;
+    //商户号
     private String mchId;
+    //商户密钥
     private String mchKey;
     private String keyPath;
     private String notifyUrl;
+    //开放平台Id
+    private String openAppId;
+    //开放平台密钥
+    private String openAppSecret;
+
 
 
 }

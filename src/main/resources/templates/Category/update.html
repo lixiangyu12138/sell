@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="common/header :: header"  ></div>
+</head>
+<body>
+<div id = "wrapper" class="toggled">
+    <!-- 边栏  -->
+    <div th:replace="common/nav :: sidebar-wrapper"  ></div>
+    <div id="page-content-wrapper">
+
+<div class="container-fluid">
+    <div class="row">
+        <div ></div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+            <form th:action="${add}" method="post" >
+                <input type="text" name="categoryId"   th:if="${category==null}"/>
+                <input type="hidden" name="categoryId"  th:value="${category!=null}?${category.categoryId}" th:if="${category!=null}"/>
+                <div class="form-group">
+                    <label for="categoryName">类目名称</label>
+                    <input type="text" class="form-control" id="categoryName" name="categoryName" placeholder="XXX"  th:value="${category!=null}?${category.categoryName}" >
+                </div>
+                <div class="form-group">
+                    <label for="categoryType">类目编号</label>
+                    <input type="text" class="form-control" id="categoryType" name="categoryType" placeholder="0.00" th:value="${category!=null}?${category.categoryType}" >
+                </div>
+
+                <div>
+                    <button class="btn btn-sm btn-primary" >添加</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+    </div>
+</div>
+
+</body>
+</html>

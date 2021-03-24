@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:fmt="">
+<head>
+    <div th:replace="common/header :: header"  ></div>
+    <style>
+        .disabled{
+            color:gray;
+            cursor:pointer;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div id = "wrapper" class="toggled">
+<!-- 边栏  -->
+    <div th:replace="common/nav :: sidebar-wrapper"  ></div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th>商品ID</th>
+                            <th>名称</th>
+                            <th>图片</th>
+                            <th>单价</th>
+                            <th>库存</th>
+                            <th>描述</th>
+                            <th>类目</th>
+                            <th>创建时间</th>
+                            <th>修改时间</th>
+                            <th colspan="2">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr  th:each="product: ${all.getContent()}">
+                            <td th:text="${product.productId}"> </td>
+                            <td th:text="${product.productName}"> </td>
+                            <td ><img th:src="${product.productIcon}" width="88" height="88"></td>
+                            <td th:text="${product.productPrice}"> </td>
+                            <th th:text="${product.productStock}"> </th>
+                            <th th:text="${product.productDescription}"> </th>
+                            <th th:text="${product.categoryType}"> </th>
+                            <th th:text="${#dates.format(product.createTime,'yyyy-MM-dd HH:mm:ss')}"> </th>
+                            <th th:text="${#dates.format(product.updateTime,'yyyy-MM-dd HH:mm:ss')}"> </th>
+                            <td><a th:href="@{'/seller/product/update?productId=' + ${product.productId}}" >修改</a></td>
+                            <td><a th:href="@{'/seller/product/downSale?productId=' + ${product.productId}}" th:if="${product.productStatus} eq '0'" >下架</a>
+                                <a th:href="@{'/seller/product/upSale?productId=' + ${product.productId}}" th:if="${product.productStatus} eq '1'" >上架</a></td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!--        分页-->
+                <div class="span12">
+
+                    <ul class="pagination pull-right " >
+                        <li  class=""th:classappend="${page==1} ? 'disabled' : ''" >
+                            <a  th:href="@{'/seller/product/list?page=' + ${page-1}+ '&size=10'}">上一页</a>
+                        </li>
+
+                        <li  th:each="product,productStat : ${all}" class=""th:classappend="${productStat.count==page} ? 'disabled' : '' ">
+
+                            <a th:href="@{'/seller/product/list?page=' + ${productStat.count}+ '&size=10'}" th:if=" ${productStat.index} lt ${all.getTotalPages()}"  th:text="${productStat.count}" >4</a>
+                        </li>
+<!--                        <li class="disabled" th:if=" ${page} eq ${all.getTotalPages()}" >-->
+<!--                            <a href="#" th:text="${all.getTotalPages()}">4</a>-->
+<!--                        </li>-->
+
+                        <li class=""th:classappend="${page==all.getTotalPages()} ? 'disabled' : ''">
+                            <a th:href="@{'/seller/product/list?page=' + ${page+1} + '&size=10'}">下一页</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<!--    -->
+</div>
+
+</body>
+</html>

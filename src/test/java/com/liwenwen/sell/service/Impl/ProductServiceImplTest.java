@@ -34,7 +34,15 @@ class ProductServiceImplTest {
     void findAll() {
         PageRequest pageRequest = PageRequest.of(0, 2);
         Page<ProductInfo> productInfos = productService.findAll(pageRequest);
-        System.out.println(productInfos.getTotalElements());
+        System.out.println(productInfos.getContent());
+    }
+    @Test
+    void upSale(){
+        productService.upSale("123456");
+    }
+    @Test
+    void downSale(){
+        productService.downSale("123456");
     }
 
 
@@ -58,4 +66,20 @@ class ProductServiceImplTest {
         ProductInfo save = productService.save(productInfo);
         Assert.assertNotNull(save);
     }
+    @Test
+    void update(){
+        ProductInfo productInfo= new ProductInfo();
+        productInfo.setProductId("666");
+        productInfo.setProductName("腊八粥");
+        productInfo.setProductPrice(new BigDecimal(5.2));
+        productInfo.setProductStock(100);
+        productInfo.setProductDescription("777");
+        productInfo.setProductIcon("xxx.jpg");
+        productInfo.setProductStatus(0);
+        productInfo.setCategoryType(2);
+        ProductInfo save = productService.save(productInfo);
+        Assert.assertNotNull(save);
+
+    }
+
 }

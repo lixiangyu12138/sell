@@ -27,7 +27,7 @@ class OrderServiceImplTest {
     @Autowired
     private OrderServiceImpl orderService;
     private final String BUYER_OPENID= "1101110";
-    private final  String ORDER_ID= "1614235346954808348";
+    private final  String ORDER_ID= "1614696238824706722";
 
     @Test
     void create() {

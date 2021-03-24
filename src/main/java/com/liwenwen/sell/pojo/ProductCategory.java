@@ -1,11 +1,12 @@
 package com.liwenwen.sell.pojo;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 /**
@@ -15,6 +16,7 @@ import java.sql.Date;
 @Proxy(lazy = false)
 //实时改变修改时间
 @DynamicUpdate
+@DynamicInsert
 @Data
 
 public class ProductCategory {
@@ -35,8 +37,9 @@ public class ProductCategory {
     /*类目号*/
     private Integer categoryType;
 
-//    private Date creste_time;
-//    private Date update_time;
+    private Date createTime;
+
+    private Date updateTime;
 
 
     public ProductCategory() {

@@ -89,21 +89,27 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     //查询单个订单
-    public OrderDto findOne(String orderId) {
-        OrderMaster orderMaster=new OrderMaster();
+    public OrderDto findOne(String orderId)   {
+        OrderMaster orderMaster = new OrderMaster();
         try {
-             orderMaster = orderMasterDao.getOne(orderId);
+           orderMaster = orderMasterDao.getOne(orderId);
+            System.out.println(orderMaster.getOrderId()==null);
+            orderMaster.getOrderStatus();
         }catch (Exception e) {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
         List<OrderDetail> orderDetails =orderDetailDao.findByOrderId(orderId);
-        if(orderDetails == null){
+        if(orderDetails.isEmpty()){
+            log.info("【查询订单】订单详情为空");
             throw  new SellException(ResultEnum.ORDERDETAIL_NOT_EXIST);
         }
         OrderDto orderDto= new OrderDto();
         BeanUtils.copyProperties(orderMaster,orderDto);
         orderDto.setOrderDetails(orderDetails);
         return orderDto;
+
+
+
     }
 
     @Override

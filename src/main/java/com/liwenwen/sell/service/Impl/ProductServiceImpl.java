@@ -25,9 +25,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductInfo findOne(String productId) {
         try {
-            ProductInfo one = productInfoDao.getOne(productId);
             //System.out.println("======"+one);
-            return one;
+            return productInfoDao.getOne(productId);
         }catch (Exception e){
             log.error("【查询商品】商品不存在");
             throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
@@ -38,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<ProductInfo> findAll(Pageable pageable) {
-        return productInfoDao.findAll((org.springframework.data.domain.Pageable) pageable);
+        return productInfoDao.findAll(pageable);
     }
 
     @Override
@@ -85,6 +84,34 @@ public class ProductServiceImpl implements ProductService {
             productInfoDao.save(productInfo);
         }
 
+    }
+
+    @Override
+    public ProductInfo upSale(String productId) {
+        ProductInfo one = productInfoDao.getOne(productId);
+        if(one == null){
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        one.setProductStatus(ProductStatusEnum.UP.getCode());
+        return productInfoDao.save(one);
+    }
+
+    @Override
+    public ProductInfo downSale(String productId) {
+        ProductInfo one = productInfoDao.getOne(productId);
+        if(one == null){
+            throw new SellException(ResultEnum.PARAM_ERROR);
+        }
+        one.setProductStatus(ProductStatusEnum.DOWN.getCode());
+        return productInfoDao.save(one);
+
+    }
+
+    @Override
+    public ProductInfo update(ProductInfo productInfo) {
+        ProductInfo one = productInfoDao.getOne(productInfo.getProductId());
+        productInfo.setCreateTime(one.getCreateTime());
+        return productInfoDao.save(productInfo);
     }
 
 

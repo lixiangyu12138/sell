@@ -11,7 +11,7 @@ public interface OrderService {
     //创建订单
     OrderDto create(OrderDto orderDto) throws Exception;
     //查询
-    OrderDto findOne(String OrderId);
+    OrderDto findOne(String OrderId) ;
     //查询订单列表
     Page<OrderDto> findList(String buyerOpenid, Pageable pageable);
 

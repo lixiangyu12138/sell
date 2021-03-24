@@ -22,4 +22,7 @@ public interface ProductService {
 
     //减库存
     void decreaseStoke(List<CarDto> carDtoList);
+    ProductInfo upSale(String productId);
+    ProductInfo downSale(String productId);
+    ProductInfo update(ProductInfo productInfo);
 }

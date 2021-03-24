@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <div th:replace="common/header :: header"  ></div>
+</head>
+<body>
+<div id = "wrapper" class="toggled">
+    <!-- 边栏  -->
+    <div th:replace="common/nav :: sidebar-wrapper"  ></div>
+    <div id="page-content-wrapper">
+
+<div class="container-fluid">
+    <div class="row">
+        <div ></div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
+            <form th:action="${add}" method="post" >
+                <input type="text" name="productId"   th:if="${product==null}"/>
+                <input type="hidden" name="productId"  th:value="${product!=null}?${product.productId}" th:if="${product!=null}"/>
+                <div class="form-group">
+                    <label for="productName">名称</label>
+                    <input type="text" class="form-control" id="productName" name="productName" placeholder="XXX"  th:value="${product!=null}?${product.productName}" >
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">价格</label>
+                    <input type="BigDecimal" class="form-control" id="productPrice" name="productPrice" placeholder="0.00" th:value="${product!=null}?${product.productPrice}" >
+                </div>
+                <div class="form-group">
+                    <label for="productStock">库存</label>
+                    <input type="productStock" class="form-control" id="productStock" name="productStock" placeholder="000" th:value="${product!=null}?${product.productStock}" >
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">描述</label>
+                    <input type="productDescription" class="form-control" id="productDescription" name="productDescription" placeholder="xxxxxxxxx" th:value="${product!=null}?${product.productDescription}">
+                </div>
+                <div class="form-group">
+                    <label for="productIcon">图片</label>
+                    <p><img th:src="${product!=null}?${product.productIcon}" width="88" height="88"></p>
+                    <input type="productIcon" class="form-control" id="productIcon" name="productIcon"  th:value="${product!=null}?${product.productIcon}" >
+                </div>
+
+                <div class="form-group">
+                    <label for="categoryType">类目</label>
+                    <select class="form-control" id="categoryType" name="categoryType" >
+                        <option th:selected="${product!=null}?${categoryType.categoryId==product.categoryType}"  th:each="categoryType:${categoryTypes}" th:value="${categoryType.categoryId}" th:text="${categoryType.categoryName}">1</option>
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-primary" >添加</button>
+                </div>
+            </form>
+        </main>
+    </div>
+</div>
+    </div>
+</div>
+
+</body>
+</html>

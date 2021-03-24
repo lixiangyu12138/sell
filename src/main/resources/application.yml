@@ -25,19 +25,24 @@ spring:
       write-dates-as-timestamps: true
 
   mvc:
-    static-path-pattern: /**
+    static-path-pattern: /static/**
 server:
   servlet:
     context-path: /sell
 wechat:
-  mpAppid: wxa765302b7924279e
+  mpAppId: wxa765302b7924279e
   mpAppSecret: 18ea55b358597865f5accdcb493bc928
+  openAppId: wxa765302b7924279e
+  openAppSecret: 18ea55b358597865f5accdcb493bc928
   mchId: 1409146202
   mchKey: 18ea55b358597865f5accdcb493bc928
   keyPath: static/api/seller.json
   notifyUrl: http://li.666600000.xyz/sell/pay/notify
 
-
+projecturl:
+  wechatMpAuthorize: http://li.666600000.xyz/
+  wechatOpenAuthorize: http://li.666600000.xyz/
+  sell:
 
 
 

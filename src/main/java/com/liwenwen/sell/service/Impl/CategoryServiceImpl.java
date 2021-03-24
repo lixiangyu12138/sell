@@ -30,4 +30,12 @@ public class CategoryServiceImpl implements CategoryService {
     public ProductCategory save(ProductCategory productCategory) {
         return productCategoryDao.save(productCategory);
     }
+
+    @Override
+    public ProductCategory update(ProductCategory productCategory) {
+        ProductCategory one = productCategoryDao.getOne(productCategory.getCategoryId());
+        productCategory.setCreateTime(one.getCreateTime());
+        return productCategoryDao.save(productCategory);
+    }
+
 }

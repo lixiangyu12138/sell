@@ -2,11 +2,13 @@ package com.liwenwen.sell.pojo;
 
 import com.liwenwen.sell.enums.OrderStatusEnum;
 import com.liwenwen.sell.enums.PayStatusEnum;
+import com.mysql.cj.Constants;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -20,6 +22,10 @@ import java.util.Date;
 public class OrderMaster {
     @Id
     //订单id
+    //@OneToOne(optional=true )
+   // @JoinColumn(name="order_id ",insertable=false, updatable=false)
+
+    @NotFound(action= NotFoundAction.IGNORE)
     private String orderId;
     //买家名字
     private String buyerName;
