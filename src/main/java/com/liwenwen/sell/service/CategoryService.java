@@ -7,7 +7,7 @@ import java.util.List;
 public interface CategoryService {
     ProductCategory findOne(Integer categoryId);
     List<ProductCategory> findAll();
-    List<ProductCategory> findByCatedoryTypeIn(List<Integer> categoryTypeList);
+    List<ProductCategory> findByCategoryTypeIn(List<Integer> categoryTypeList);
     ProductCategory save(ProductCategory productCategory);
     ProductCategory update(ProductCategory productCategory);
 

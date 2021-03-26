@@ -7,7 +7,6 @@ import com.liwenwen.sell.exception.SellException;
 import com.liwenwen.sell.service.OrderService;
 import com.liwenwen.sell.service.PayService;
 import com.lly835.bestpay.model.PayResponse;
-import com.lly835.bestpay.rest.type.Post;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,13 +23,7 @@ public class PayController {
     @Autowired
     private PayService payService;
 
-    /**
-     * 用的Thymeleaf
-     * @param orderId
-     * @param returnUrl
-     * @param map
-     * @return
-     */
+
     @GetMapping("/create")
     public String pay(@RequestParam("orderId") String orderId,
                             @RequestParam("returnUrl") String returnUrl,

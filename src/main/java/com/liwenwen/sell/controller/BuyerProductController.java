@@ -38,7 +38,7 @@ public class BuyerProductController {
 //            categoryTypeList.add(productinfo.getCategoryType()); //类目编号提取出来，添加到list中
 //        }
         //类目列表
-        List<ProductCategory> productCategoryList = categoryService.findByCatedoryTypeIn(categoryTypeList);
+        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
 
         //数据拼装

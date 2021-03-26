@@ -16,6 +16,7 @@ import com.liwenwen.sell.service.OrderService;
 import com.liwenwen.sell.service.ProductService;
 import com.liwenwen.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -39,6 +40,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderDetailDao orderDetailDao;
     @Autowired
     private OrderMasterDao orderMasterDao;
+    @Autowired
+    private PushNotifyImpl pushNotify;
 
     @Override
     @Transactional
@@ -179,8 +182,8 @@ public class OrderServiceImpl implements OrderService {
             log.error("【取消订单】更新失败 orderMaster={}" ,orderMaster);
             throw new SellException(ResultEnum.ORDER_DELETE_ERROR2);
         }
-
-
+        //推送微信通知
+        pushNotify.orderStatus(orderDto);
         return orderDto;
     }
 

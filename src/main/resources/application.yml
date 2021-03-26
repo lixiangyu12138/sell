@@ -41,11 +41,13 @@ wechat:
   mchKey: 18ea55b358597865f5accdcb493bc928
   keyPath: static/api/seller.json
   notifyUrl: http://li.666600000.xyz/sell/pay/notify
+  TemplateId:
+    orderStatus: ChE9-_oRz1oB68fphOs5t3xgJ84eoiUz171SgRtdzFs
 
 projecturl:
   wechatMpAuthorize: http://li.666600000.xyz/
   wechatOpenAuthorize: http://li.666600000.xyz/
-  sell:
+  sell: http://li.666600000.xyz/
 
 
 

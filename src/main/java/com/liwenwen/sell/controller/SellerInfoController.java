@@ -1,6 +1,6 @@
 package com.liwenwen.sell.controller;
 
-import ch.qos.logback.core.util.TimeUtil;
+
 import com.liwenwen.sell.pojo.SellerInfo;
 import com.liwenwen.sell.service.SellerService;
 import com.liwenwen.sell.utils.CookieUtil;
@@ -28,7 +28,7 @@ public class SellerInfoController {
     private SellerService sellerService;
     @Autowired
     private StringRedisTemplate redisTemplate;
-    int i = 0;
+
     //private String token = UUID.randomUUID().toString();
     private String status = "off";
     Cookie cookie= null;
@@ -52,7 +52,7 @@ public class SellerInfoController {
         String token = UUID.randomUUID().toString();
         Integer expire= 7200;
         redisTemplate.opsForValue().set("token_"+token,openId,expire, TimeUnit.SECONDS);
-        String s = redisTemplate.opsForValue().get("token_" + token);
+        //String s = redisTemplate.opsForValue().get("token_" + token);
         //System.out.println(s);
 
         return "redirect:/seller/success?token="+token;

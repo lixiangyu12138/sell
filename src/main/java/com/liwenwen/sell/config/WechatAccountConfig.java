@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import javax.net.ssl.SSLContext;
+import java.util.Map;
 
 @Data
 @Component
@@ -24,6 +25,10 @@ public class WechatAccountConfig {
     private String openAppId;
     //开放平台密钥
     private String openAppSecret;
+    /**
+     * 微信通知模板Id
+     */
+    private Map<String,String> templateId;
 
 
 

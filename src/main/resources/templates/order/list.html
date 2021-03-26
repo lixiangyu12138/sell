@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="common/header :: header"  ></div>
     <style>
@@ -53,11 +53,11 @@
                 <div class="span12">
 
                     <ul class="pagination pull-right " >
-                        <li  class=""th:classappend="${page==1} ? 'disabled' : ''" >
-                            <a  th:href="@{'/seller/order/list?page=' + ${page-1}+ '&size=10'}">上一页</a>
+                        <li  class="" th:classappend="${page==1} ? 'disabled' : ''" >
+                            <a  th:href="@{'/seller/order/list?page=' + ${page -1} + '&size=10'}">上一页</a>
                         </li>
 
-                        <li  th:each="order,orderStat : ${all}" class=""th:classappend="${orderStat.count==page} ? 'disabled' : '' ">
+                        <li  th:each="order,orderStat : ${all}" class="" th:classappend="${orderStat.count==page} ? 'disabled' : '' ">
 
                             <a th:href="@{'/seller/order/list?page=' + ${orderStat.count}+ '&size=10'}" th:if=" ${orderStat.index} lt ${all.getTotalPages()}"  th:text="${orderStat.count}" >4</a>
                         </li>
@@ -65,7 +65,7 @@
                             <a href="#" th:text="${all.getTotalPages()}">4</a>
                         </li>
 
-                        <li class=""th:classappend="${page==all.getTotalPages()} ? 'disabled' : ''">
+                        <li class="" th:classappend="${page==all.getTotalPages()} ? 'disabled' : ''">
                             <a th:href="@{'/seller/order/list?page=' + ${page+1} + '&size=10'}">下一页</a>
                         </li>
                     </ul>
@@ -75,6 +75,29 @@
     </div>
 <!--    -->
 </div>
+<script>
+    let ws = null;
+    if("WebSocket"in window){
+        ws = new WebSocket('ws://li.666600000.xyz/sell/webSocket');
+    }else {
+        alert("该浏览器不支持WebSocket！");
+    }
+    ws.onopen = function (event){
+        console.log('建立连接');
+    }
+    ws.onclose = function (event){
+        console.log('关闭连接');
+    }
+    ws.onmessage=function (event){
+        console.log('收到消息'+event.data);
+    }
+    ws.onerror= function (event){
+        alert('websocket发生错误');
+    }
+    window.onbeforeunload=function (event){
+        ws.close();
+    }
+</script>
 
 </body>
 </html>

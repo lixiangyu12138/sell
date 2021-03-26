@@ -65,7 +65,7 @@ public class WechatController {
      */
     @GetMapping("/qrAuthorize")
     public String qrAuthorize(Map<String,Object> map){
-        String returnUrl = projectUrlConfig.getWechatOpenAuthorize()+"sell/seller/login";
+        String returnUrl = projectUrlConfig.getSell()+"sell/seller/login";
         String url = projectUrlConfig.getWechatOpenAuthorize()+"sell/wechat/qrUserInfo";
 
         //自己写的登录
