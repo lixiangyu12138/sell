@@ -19,7 +19,8 @@ class SellerServiceImplTest {
 
     @Test
     void findSellerInfoByOpenId() {
-        SellerInfo abc = sellerService.findSellerInfoByOpenId("666");
+        SellerInfo abc = sellerService.findSellerInfoByOpenId("abc");
+        log.info("abc={}",abc);
         Assert.assertNotNull(abc);
     }
 }

@@ -57,9 +57,15 @@ public class WechatController {
         return "redirect:"+returnUrl+"?openid="+openId;
 
     }
+
+    /**
+     * 将获取用户openid的连接转化为二维码
+     * @param map
+     * @return
+     */
     @GetMapping("/qrAuthorize")
     public String qrAuthorize(Map<String,Object> map){
-        String returnUrl = "baidu.com";
+        String returnUrl = projectUrlConfig.getWechatOpenAuthorize()+"sell/seller/login";
         String url = projectUrlConfig.getWechatOpenAuthorize()+"sell/wechat/qrUserInfo";
 
         //自己写的登录
@@ -90,7 +96,7 @@ public class WechatController {
         }
         String openId = wxOAuth2AccessToken.getOpenId();
         log.info("【客户端授权登录】 获取openid 成功 openId={}",openId);
-        return "redirect:"+returnUrl+"?openid="+openId;
+        return "redirect:"+returnUrl+"?openId="+openId;
     }
 
 }

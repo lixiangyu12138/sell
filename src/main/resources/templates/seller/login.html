@@ -9,8 +9,12 @@
     <script type="text/javascript"  th:src="@{/static/seller/js/qrcode.min.js}"></script>
 </head>
 <body>
+
 <input id="text" type="hidden"  th:value= "${redirectUrl}"value="http://jindo.dev.naver.com/collie" style="width:80%" /><br />
-<div id="qrcode" style="width:80px; height:80px; margin-top:35px; padding-left: 497px" ></div>
+<div id="qrcode" style="width:80px; height:80px; margin-top:35px; padding-left: 497px" ></div><br>
+<p id="myDiv" style="margin-top: 220px;margin-left: 560px"><br>请扫码后点击登录</br></p>
+<input id="btn1" type="button" style="margin-left: 606px" value="登录" onclick="test();" />
+
 
 <script type="text/javascript">
     var qrcode = new QRCode(document.getElementById("qrcode"), {
@@ -41,6 +45,25 @@
             makeCode();
         }
     });
+
+</script>
+<script type="text/javascript">
+    function test() {
+        let xhr = new XMLHttpRequest();
+        xhr.open('get', 'http://li.666600000.xyz/sell/seller/success');//将拼串的URL放置此
+        xhr.send();
+        xhr.onreadystatechange = function () {
+            if (xhr.status === 200) {
+                document.getElementById("myDiv").innerHTML=xhr.responseText;
+                if(xhr.responseText==="on"){
+                    location.href="http://li.666600000.xyz/sell/seller/order/list";
+                }
+                //接受响应的操作
+            }
+        }
+
+    }
+
 </script>
 
 </body>
