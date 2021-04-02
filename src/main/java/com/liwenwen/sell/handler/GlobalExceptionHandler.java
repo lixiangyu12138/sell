@@ -6,7 +6,6 @@ import com.liwenwen.sell.config.ProjectUrlConfig;
 import com.liwenwen.sell.exception.SellException;
 import com.liwenwen.sell.exception.SellerAuthorizeException;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 全局处理异常
+ * 异常统一处理
  */
 @RestControllerAdvice
 @Slf4j

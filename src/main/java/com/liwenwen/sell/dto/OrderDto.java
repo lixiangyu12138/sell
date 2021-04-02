@@ -39,10 +39,10 @@ public class OrderDto {
     //支付状态  未支付
     private Integer payStatus;
     //创建时间
-    //@JsonSerialize(using = DateFormat.class)
+    @JsonSerialize(using = DateFormat.class)
     private Date createTime;
     //更新时间
-   // @JsonSerialize(using = DateFormat.class)
+   @JsonSerialize(using = DateFormat.class)
     private Date updateTime;
     //订单详情
     private List<OrderDetail> orderDetails;

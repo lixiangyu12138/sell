@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>微信支付</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no" />
-    <link rel="stylesheet" type="text/css" th:href="@{/static/paypage/css/wxzf.css}">
-    <script th:src="@{/static/paypage/js/jquery.js}"></script>
+    <link rel="stylesheet" type="text/css" href="./css/wxzf.css">
+    <script type="text/javascript" src="/sell/webjars/jquery/3.4.0/jquery.js"></script>
     <script  th:inline="javascript">
         $(function(){
             //出现浮动层
@@ -32,19 +32,21 @@
                 }else{
                     $(".mm_box li").eq(i-1).addClass("mmdd");
                     setTimeout(function(){
-                        location.href=""+[[${returnUrl}]];
-                        var request = new XMLHttpRequest();
-                        request.open('POST', '/sell/pay/notify');
-                        request.setRequestHeader("Content-type","application/json");//设置请求头 注：post方式必须设置请求头（在建立连接后设置请求头）
-                        request.send(JSON.stringify([[${Response.PrePayParams}]]));
-                        request.onreadystatechange = function () {//请求后的回调接口，可将请求成功后要执行的程序写在其中
-                            if (request.readyState == 4 && request.status == 200) {//验证请求是否发送成功
-                                return;
+                        let xhr = new XMLHttpRequest();
+                        //xhr.open('get', 'http://127.0.0.1:8080/sell/pay/notify2');//将拼串的URL放置此
+                        xhr.open('GET', '/sell/pay/notify?notifyData='+[[${Response.prePayParams}]]);
+                        xhr.send();
+                        xhr.onreadystatechange = function () {
+                            if (xhr.status === 200) {
+                                document.getElementById("myDiv").innerHTML=xhr.responseText;
+
+                                                      location.href=""+[[${returnUrl}]];
+
+                                }
+                                //接受响应的操作
                             }
-                        };
-                        if (request.readyState == 4 && request.status == 200) {//验证请求是否发送成功
-                            return;}
-                    },50);
+
+                    },100);
                     //window.document.location="cg.html"
                 }
             });
@@ -58,26 +60,12 @@
                 }
                 //alert(i);
 
-
-
             });
-
-
-
-
         });
     </script>
+
 </head>
 <body>
-<!--<div class="header">-->
-<!--    <div class="all_w ">-->
-<!--        <div class="gofh"> <a href="#"><img th:src="@{/static/paypage/images/jt_03.jpg}" ></a> </div>-->
-<!--        <div class="ttwenz">-->
-<!--            <h4>确认交易</h4>-->
-<!--            <h5>微信安全支付</h5>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 <div class="wenx_xx">
     <div class="mz" th:text="${Response.SignType}" >李文文的外卖商城</div>
     <div class="wxzf_price" th:text="${Response.orderAmount}">￥11.90</div>
@@ -91,12 +79,12 @@
 
 <div class="ftc_wzsf">
     <div class="srzfmm_box">
-        <div class="qsrzfmm_bt clear_wl"> <img th:src="@{/static/paypage/images/xx_03.jpg}" class="tx close fl" > <img th:src="@{/static/paypage/images/jftc_03.jpg}" class="tx fl" ><span class="fl">请输入支付密码</span> </div>
+        <div class="qsrzfmm_bt clear_wl"> <img src="./images/xx_03.jpg" class="tx close fl" > <img src="./images/jftc_03.jpg" class="tx fl" ><span class="fl">请输入支付密码</span> </div>
         <div class="zfmmxx_shop">
-            <div class="mz" th:text="${Response.SignType}">李文文的外卖商城</div>
+            <div class="mz" id="myDiv">李文文的外卖商城</div>
             <div class="wxzf_price" th:text="${Response.orderAmount}">￥11.90</div>
         </div>
-        <a th:href="${returnUrl}" class="blank_yh"> <img th:src="@{/static/paypage/images/jftc_07.jpg}" class="fl"  ><span class="fl ml5">招商银行信用卡</span> <img th:src="@{/static/paypage/images/jftc_09.jpg}" class="fr"></a>
+        <a th:href="${returnUrl}" class="blank_yh"> <img src="./images/jftc_07.jpg" class="fl"  ><span class="fl ml5">招商银行信用卡</span> <img src="./images/jftc_09.jpg" class="fr"></a>
         <ul class="mm_box">
             <li></li>
             <li></li>
@@ -107,7 +95,7 @@
         </ul>
     </div>
     <div class="numb_box">
-        <div class="xiaq_tb"> <img th:src="@{/static/paypage/images/jftc_14.jpg}" height="10"> </div>
+        <div class="xiaq_tb"> <img src="./images/jftc_14.jpg" height="10"> </div>
         <ul class="nub_ggg">
             <li><a href="javascript:void(0);">1</a></li>
             <li><a href="javascript:void(0);" class="zj_x">2</a></li>
@@ -120,10 +108,12 @@
             <li><a href="javascript:void(0);">9</a></li>
             <li><span></span></li>
             <li><a href="javascript:void(0);" class="zj_x">0</a></li>
-            <li><span  class="del" > <img th:src="@{/static/paypage/images/jftc_18.jpg}"   ></span></li>
+            <li><span  class="del" > <img src="./images/jftc_18.jpg"   ></span></li>
         </ul>
+       <button value="666"></button>
     </div>
-    <div class="hbbj"></div>
+    <div class="hbbj"> </div>
+
 </div>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class PayServiceImpl implements PayService {
     @Override
     public PayResponse create(OrderDto orderDto) {
 
-        log.info("【微信支付】 orderDto={}", JsonUtil.toJson(orderDto));
+        //log.info("【微信支付】 orderDto={}", JsonUtil.toJson(orderDto));
         PayRequest payRequest = new PayRequest();
         payRequest.setOpenid(orderDto.getBuyerOpenid());
         payRequest.setOrderAmount(orderDto.getOrderAmount().doubleValue());
@@ -57,14 +57,14 @@ public class PayServiceImpl implements PayService {
         //支付人（下单人== 支付人）
 
         PayInfo  daoOne = payInfoDao.getOne(notifyData);
-
         PayResponse payResponse=new PayUtils().getPayResponse(daoOne);
         log.info("【发起支付】 异步通知，payResponse={}",JsonUtil.toJson(payResponse));
+        //log.info("【发起支付】 异步通知，notifyData={}",JsonUtil.toJson(notifyData));
         //查询订单
         OrderDto one = orderService.findOne(payResponse.getOrderId());
         //判断订单是否存在
         if(one ==null){
-            log.error("【微信那支付】 异步通知，订单不存在 orderId={}" ,payResponse.getOrderId());
+            log.error("【微信支付】 异步通知，订单不存在 orderId={}" ,payResponse.getOrderId());
             throw  new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
         //判断金额是否一致(0.1 .0.10)
@@ -74,9 +74,9 @@ public class PayServiceImpl implements PayService {
                     one.getOrderAmount());
             throw new SellException(ResultEnum.WECHAT_PAY_ERROR);
         }
+        log.info("【发起支付】 ++++校验通过+++");
         orderService.pay(one);
         log.info("【发起支付】 异步通知，payResponse={}",JsonUtil.toJson(payResponse));
         return payResponse;
-
     }
 }

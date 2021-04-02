@@ -20,13 +20,13 @@ public class WebSocket {
     public void onOpen(Session session){
         this.session = session;
         wsSet.add(this);
-        log.info("【websocket消息】有新的连接，总数:{}",wsSet.size());
+        log.info("【websocket消息】有新的连接，总数={}",wsSet.size());
 
     }
     @OnClose
     public void onClose(){
         wsSet.remove(this);
-        log.info("【websocket消息】连接断开，总数{}",wsSet.size());
+        log.info("【websocket消息】连接断开，总数={}",wsSet.size());
     }
     @OnMessage
     public void onMessage(String msg){

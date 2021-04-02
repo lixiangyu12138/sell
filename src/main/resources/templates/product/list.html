@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:fmt="">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="common/header :: header"  ></div>
     <style>
@@ -37,7 +37,7 @@
                         <tr  th:each="product: ${all.getContent()}">
                             <td th:text="${product.productId}"> </td>
                             <td th:text="${product.productName}"> </td>
-                            <td ><img th:src="${product.productIcon}" width="88" height="88"></td>
+                            <td ><img th:src="${product.productIcon}" width="88" height="88"  th:alt="${product.productName}" alt=""></td>
                             <td th:text="${product.productPrice}"> </td>
                             <th th:text="${product.productStock}"> </th>
                             <th th:text="${product.productDescription}"> </th>
@@ -57,11 +57,11 @@
                 <div class="span12">
 
                     <ul class="pagination pull-right " >
-                        <li  class=""th:classappend="${page==1} ? 'disabled' : ''" >
-                            <a  th:href="@{'/seller/product/list?page=' + ${page-1}+ '&size=10'}">上一页</a>
+                        <li  class="" th:classappend="${page==1} ? 'disabled' : ''" >
+                            <a  th:href="@{'/seller/product/list?page=' + ${page - 1} +  '&size=10'}">上一页</a>
                         </li>
 
-                        <li  th:each="product,productStat : ${all}" class=""th:classappend="${productStat.count==page} ? 'disabled' : '' ">
+                        <li  th:each="product,productStat : ${all}" class="" th:classappend="${productStat.count==page} ? 'disabled' : '' ">
 
                             <a th:href="@{'/seller/product/list?page=' + ${productStat.count}+ '&size=10'}" th:if=" ${productStat.index} lt ${all.getTotalPages()}"  th:text="${productStat.count}" >4</a>
                         </li>
@@ -69,7 +69,7 @@
 <!--                            <a href="#" th:text="${all.getTotalPages()}">4</a>-->
 <!--                        </li>-->
 
-                        <li class=""th:classappend="${page==all.getTotalPages()} ? 'disabled' : ''">
+                        <li class="" th:classappend="${page==all.getTotalPages()} ? 'disabled' : ''">
                             <a th:href="@{'/seller/product/list?page=' + ${page+1} + '&size=10'}">下一页</a>
                         </li>
                     </ul>

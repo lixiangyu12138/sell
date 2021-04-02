@@ -3,6 +3,7 @@ package com.liwenwen.sell.pojo;
 
 
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.liwenwen.sell.enums.ProductStatusEnum;
 
 import com.liwenwen.sell.utils.DateFormatUtil;
@@ -11,6 +12,7 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.Proxy;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 
@@ -40,6 +42,7 @@ public class ProductInfo {
     private Integer productStatus = ProductStatusEnum.UP.getCode();
     /*类目编号*/
     private Integer categoryType;
+    @JsonSerialize(using =DateFormat.class )
     private Date createTime;
     private Date updateTime;
     public static String getOrderStatusEnum(Integer n){

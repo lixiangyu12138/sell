@@ -24,10 +24,10 @@ public class PayInfo {
 
     /**
      * payResponse={
-     *   "prePayParams": "en0qbqxhNwt3BHQ-lkHlY",
+     *   "prePayParams": "en0qbqxhNwt3BHQ-lkHlY",  预支付订单好
      *   "signType": "微信订单",
-     *   "orderAmount": 12.9,
-     *   "orderId": "1615449067202528005"
+     *   "orderAmount": 12.9,  订单金额
+     *   "orderId": "1615449067202528005"  订单号
      * }
      */
 
@@ -37,9 +37,7 @@ public class PayInfo {
 
     public PayInfo(PayResponse payResponse) {
         this.prePayParams = payResponse.getPrePayParams();
-
         this.signType = payResponse.getSignType();
-
         this.orderAmount = payResponse.getOrderAmount();
         this.orderId = payResponse.getOrderId();
     }

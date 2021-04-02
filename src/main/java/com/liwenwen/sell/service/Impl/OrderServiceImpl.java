@@ -14,6 +14,7 @@ import com.liwenwen.sell.pojo.OrderMaster;
 import com.liwenwen.sell.pojo.ProductInfo;
 import com.liwenwen.sell.service.OrderService;
 import com.liwenwen.sell.service.ProductService;
+import com.liwenwen.sell.service.WebSocket;
 import com.liwenwen.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.units.qual.A;
@@ -42,6 +43,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderMasterDao orderMasterDao;
     @Autowired
     private PushNotifyImpl pushNotify;
+    @Autowired
+    private WebSocket webSocket;
 
     @Override
     @Transactional
@@ -69,8 +72,6 @@ public class OrderServiceImpl implements OrderService {
           orderDetail.setDetailId(KeyUtil.genUniqueKey());
           orderDetail.setOrderId(orderId);
           orderDetailDao.save(orderDetail);
-
-
       }
       //订单信息写入数据库
         OrderMaster orderMaster = new OrderMaster();
@@ -85,8 +86,12 @@ public class OrderServiceImpl implements OrderService {
         List<CarDto> carDtoList = orderDto.getOrderDetails().stream().map(e ->
                 new CarDto(e.getProductId(),e.getProductQuantity())
                 ).collect(Collectors.toList());
+
         //System.out.println("测试-------："+carDtoList);
         productService.decreaseStoke(carDtoList);
+        //发送webSocket消息
+        webSocket.sendMessage(orderDto.getOrderId());
+        System.out.println("测试"+orderDto.getOrderId());
         return orderDto;
     }
 
@@ -190,6 +195,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public OrderDto pay(OrderDto orderDto) {
+        log.info("【支付订单】++++修改订单状态++++}");
         //判断订单状态
         if(!orderDto.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
             log.error("【支付订单】订单状态不正确，orderId={},orderStatus={}", orderDto.getOrderId(), orderDto.getOrderStatus());

@@ -42,7 +42,7 @@ public class SellerInfoController {
              map.put("msg","登录成功");
              map.put("url","/sell/seller/order/list");
         }catch (Exception e){
-            log.info("【卖家端登录】 登录失败 e = {}",e);
+            log.info("【卖家端登录】 登录失败 e = {}",e.getMessage());
             map.put("msg",e.getMessage());
             map.put("url","/sell/wechat/qrAuthorize");
             return "common/error";

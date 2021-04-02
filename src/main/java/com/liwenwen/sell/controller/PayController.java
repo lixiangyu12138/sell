@@ -6,7 +6,6 @@ import com.liwenwen.sell.enums.ResultEnum;
 import com.liwenwen.sell.exception.SellException;
 import com.liwenwen.sell.service.OrderService;
 import com.liwenwen.sell.service.PayService;
-import com.lly835.bestpay.model.PayResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +29,7 @@ public class PayController {
                             Map<String,Object> map){
         //查询订单
         OrderDto orderDto = orderService.findOne(orderId);
-        //log.info("【微信支付】orderDto={}",orderDto);
+        log.info("【微信支付】returnUrl={}",returnUrl);
         if(orderDto==null){
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
         }
@@ -39,21 +38,19 @@ public class PayController {
         map.put("Response",payService.create(orderDto));
         map.put("returnUrl",returnUrl);
         return "pay/create";
-
     }
-    @PostMapping("/notify")
+
+
+    @GetMapping("/notify")
     @ResponseBody
-    public String  notifyData(@RequestBody String notifyData){
-        //System.out.println(notifyData);
+    public String  notifyData(String notifyData){
+        log.info("【微信支付】#################异步通知#######################################");
         Gson gson = new Gson();
         String data = gson.fromJson(notifyData,String.class);
-        PayResponse payResponse = payService.notify(data);
-        //log.info("【微信支付】payResponse={}",payResponse);
-        return "<xml>" +
-                "<return_code>><![CDATA[SUCCESS]]></return_code>" +
-                "<return_msg><![CDATA[OK]]></return_msg>" +
-                "</xml>";
-
+        log.info("【微信支付controller】notifyData={}",notifyData);
+        payService.notify(data);
+        log.info("【微信支付】#################成功#######################################");
+        return "success";
     }
 
 }
